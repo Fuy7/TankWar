@@ -34,7 +34,7 @@ public class TankFrame extends Frame{
         bullets = new ArrayList<>();
         explodes = new ArrayList<>();
         //读取配置文件
-        int tankCount = Integer.parseInt(PropertiesMgr.getTankCount("initTankCount"));
+        int tankCount = Integer.parseInt(PropertiesMgr.get("initTankCount"));
         for (int i = 0; i < tankCount; i++) {
             enemyTanks.add(new Tank(100+i*50,200,Dir.D,Group.BAD));
         }

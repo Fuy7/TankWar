@@ -1,6 +1,10 @@
 package com.fuy.tank;
 
 
+import com.fuy.tank.strategy.BossFireStrategy;
+import com.fuy.tank.strategy.DefaultFireStrategy;
+import com.fuy.tank.strategy.FireStrategy;
+
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
@@ -14,6 +18,10 @@ public class Player{
     private boolean isLive = true;
     private Dir dir;    //坦克方向
     private Group group;
+
+    public Dir getDir() {
+        return dir;
+    }
 
     public Player(int x, int y, Dir dir, Group group) {
         this.x = x;
@@ -77,9 +85,20 @@ public class Player{
     }
     //开火
     private void fire() {
-        int bx = x + ResourceMgr.goodTankU.getWidth()/2 - ResourceMgr.bulletU.getWidth()/2;
-        int by = y + ResourceMgr.goodTankU.getHeight()/2 - ResourceMgr.bulletU.getHeight()/2;
-        TankFrame.INSTANCE.add(new Bullet(bx,by,dir,group));
+
+        ClassLoader loader = Player.class.getClassLoader();//获取该类的ClassLoader
+        String strategyName = PropertiesMgr.get("FireStrategyType");//读取配置文件中的配置
+        FireStrategy strategy = null;
+        try {
+            //Class clazz = loader.loadClass("com.fuy.tank.strategy." + strategyName); //将对应的strategy加载到内存中
+            Class clazz = Class.forName("com.fuy.tank.strategy." + strategyName); //将对应的strategy加载到内存中
+             strategy =  (FireStrategy) (clazz.getDeclaredConstructor().newInstance());   //得到类的无参构造函数进行实例化对象
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        strategy.fire(this);
+
     }
 
     public void keyPressed(KeyEvent e) {     //KeyEvent e 按键事件

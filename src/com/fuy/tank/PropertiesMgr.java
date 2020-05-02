@@ -14,7 +14,7 @@ public class PropertiesMgr {
         }
     }
 
-    public static String getTankCount(String key){
+    public static String get(String key){
         return (String) property.get(key);
     }
 

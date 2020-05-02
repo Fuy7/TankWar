@@ -1,1 +1,2 @@
 initTankCount=5
+FireStrategyType=BossFireStrategy
