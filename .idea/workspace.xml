@@ -1,35 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="04bcacd7-52f5-4aad-b671-9b14b4368278" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/com/fuy/tank/AbstractGameObject.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/fuy/tank/Wall.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/fuy/tank/chainforesponsibility/BulletTankCollider.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/fuy/tank/chainforesponsibility/BulletWallCollider.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/fuy/tank/chainforesponsibility/Collider.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/fuy/tank/chainforesponsibility/TankWallCollider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TankWar.iml" beforeDir="false" afterPath="$PROJECT_DIR$/TankWar.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TankWar/com/fuy/tank/Bullet$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TankWar/com/fuy/tank/Bullet$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TankWar/com/fuy/tank/Bullet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TankWar/com/fuy/tank/Bullet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TankWar/com/fuy/tank/Explode$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TankWar/com/fuy/tank/Explode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TankWar/com/fuy/tank/Explode.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TankWar/com/fuy/tank/Player$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TankWar/com/fuy/tank/Player$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TankWar/com/fuy/tank/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TankWar/com/fuy/tank/Player.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TankWar/com/fuy/tank/Tank$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TankWar/com/fuy/tank/Tank$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TankWar/com/fuy/tank/Tank.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TankWar/com/fuy/tank/Tank.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TankWar/com/fuy/tank/TankFrame$TankKeyListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TankWar/com/fuy/tank/TankFrame$TankKeyListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TankWar/com/fuy/tank/TankFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TankWar/com/fuy/tank/TankFrame.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TankWar/com/fuy/tank/strategy/BossFireStrategy.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TankWar/com/fuy/tank/strategy/BossFireStrategy.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TankWar/com/fuy/tank/strategy/DefaultFireStrategy.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TankWar/com/fuy/tank/strategy/DefaultFireStrategy.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TankWar/config" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TankWar/config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fuy/tank/Bullet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/fuy/tank/Bullet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fuy/tank/Explode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/fuy/tank/Explode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fuy/tank/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/fuy/tank/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fuy/tank/Tank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/fuy/tank/Tank.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fuy/tank/TankFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/fuy/tank/TankFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config" beforeDir="false" afterPath="$PROJECT_DIR$/src/config" afterDir="false" />
-    </list>
+    <list default="true" id="04bcacd7-52f5-4aad-b671-9b14b4368278" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -156,8 +128,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/fuy/tank/chainforesponsibility/TankWallCollider.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="312">
-              <caret line="16" column="29" selection-start-line="16" selection-start-column="29" selection-end-line="16" selection-end-column="29" />
+            <state relative-caret-position="96">
+              <caret line="4" column="25" lean-forward="true" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -329,7 +301,7 @@
       <updated>1588312872848</updated>
       <workItem from="1588312874107" duration="21900000" />
       <workItem from="1588412246347" duration="1754000" />
-      <workItem from="1588414111846" duration="22339000" />
+      <workItem from="1588414111846" duration="22617000" />
     </task>
     <task id="LOCAL-00001" summary="基本实现坦克大战雏形">
       <created>1588411554585</created>
@@ -352,11 +324,18 @@
       <option name="project" value="LOCAL" />
       <updated>1588426350048</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="使用责任链设计模式处理碰撞逻辑">
+      <created>1588487428712</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1588487428712</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="45993000" />
+    <option name="totallyTimeSpent" value="46271000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -435,7 +414,8 @@
     <MESSAGE value="基本实现坦克大战雏形" />
     <MESSAGE value="使用策略者模式" />
     <MESSAGE value="使用配置文件+反射机制使得方便切换主战坦克的发射模式" />
-    <option name="LAST_COMMIT_MESSAGE" value="使用配置文件+反射机制使得方便切换主战坦克的发射模式" />
+    <MESSAGE value="使用责任链设计模式处理碰撞逻辑" />
+    <option name="LAST_COMMIT_MESSAGE" value="使用责任链设计模式处理碰撞逻辑" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/com/fuy/tank/Group.java">
@@ -691,8 +671,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/fuy/tank/chainforesponsibility/TankWallCollider.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="16" column="29" selection-start-line="16" selection-start-column="29" selection-end-line="16" selection-end-column="29" />
+        <state relative-caret-position="96">
+          <caret line="4" column="25" lean-forward="true" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
         </state>
       </provider>
     </entry>
