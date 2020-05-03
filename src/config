@@ -1,2 +1,4 @@
 initTankCount=5
+
 FireStrategyType=BossFireStrategy
+ColliderType=BulletTankCollider,BulletWallCollider,TankWallCollider

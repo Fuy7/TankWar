@@ -1,20 +1,24 @@
 package com.fuy.tank;
 
 import java.awt.*;
-
-public class Bullet {
+//子弹类
+public class Bullet extends AbstractGameObject{
 
     public static final int SPEED = 10;
     private int x, y;
+    private int w = ResourceMgr.bulletU.getWidth();
+    private int h = ResourceMgr.bulletU.getHeight();
     private Dir dir;
     private Group group;
     private boolean isLive = true;
+    private Rectangle rectangle;
 
     public Bullet(int x, int y, Dir dir, Group group) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.group = group;
+        this.rectangle = new Rectangle(x,y,w,h);
     }
 
     public boolean isLive() {
@@ -27,22 +31,26 @@ public class Bullet {
 
     //绘画方法
     public void paint(Graphics g) {     //画笔(系统自动初始化)
-            //加载图片
-            switch (dir){
+        //if(!this.isLive) return;
+        //加载图片
+            switch (dir) {
                 case L:
-                    g.drawImage(ResourceMgr.bulletL,x,y,null);
+                    g.drawImage(ResourceMgr.bulletL, x, y, null);
                     break;
                 case R:
-                    g.drawImage(ResourceMgr.bulletR,x,y,null);
+                    g.drawImage(ResourceMgr.bulletR, x, y, null);
                     break;
                 case U:
-                    g.drawImage(ResourceMgr.bulletU,x,y,null);
+                    g.drawImage(ResourceMgr.bulletU, x, y, null);
                     break;
                 case D:
-                    g.drawImage(ResourceMgr.bulletD,x,y,null);
+                    g.drawImage(ResourceMgr.bulletD, x, y, null);
                     break;
             }
-        move(); //每次画的时候就更新下坐标
+            move(); //每次画的时候就更新下坐标
+            //需要更新子弹的坐标
+            rectangle.x = x;
+            rectangle.y = y;
     }
 
     private void move() {
@@ -62,11 +70,10 @@ public class Bullet {
         if(!this.isLive || !tank.isLive()) return;//死亡后不再碰撞
         if(this.group == tank.getGroup()) return;//己方子弹不碰撞
         //获取子弹的方块
-        Rectangle rect = new Rectangle(x,y,ResourceMgr.bulletU.getWidth(),ResourceMgr.bulletU.getHeight());
         //获取到坦克方块
         Rectangle rectTank = new Rectangle(tank.getX(),tank.getY(),ResourceMgr.badTankU.getWidth(),ResourceMgr.goodTankU.getHeight());
         //检测相交 intersects方法
-        if(rect.intersects(rectTank)){
+        if(rectangle.intersects(rectTank)){
             this.die();
             tank.die();
         }
@@ -87,7 +94,7 @@ public class Bullet {
     }
 
     //子弹消失
-    private void die() {
+    public void die() {
         this.setLive(false);
     }
 
@@ -96,6 +103,10 @@ public class Bullet {
         if(x < 0 || y < 30 || x > TankFrame.GAME_WIDTH || y > TankFrame.GAME_HEIGHT){
             isLive = false;
         }
+    }
+
+    public Rectangle getRectangle(){
+        return rectangle;
     }
 
 }

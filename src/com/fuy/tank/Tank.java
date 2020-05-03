@@ -5,7 +5,7 @@ import java.awt.*;
 import java.util.Random;
 
 //坦克实体类
-public class Tank {
+public class Tank extends AbstractGameObject{
 
     private int x, y,oldX,oldY;
     private boolean moving = true;  //坦克运动状态
@@ -15,6 +15,7 @@ public class Tank {
     private Group group;
     private int tankWidth;
     private int tankHeight;
+    private Rectangle rectangle;
 
     public Group getGroup() {
         return group;
@@ -30,6 +31,7 @@ public class Tank {
         this.oldY = y;
         this.tankWidth = ResourceMgr.badTankU.getWidth();
         this.tankHeight = ResourceMgr.badTankU.getHeight();
+        this.rectangle = new Rectangle(x,y,tankWidth,tankHeight);
     }
 
     public boolean isLive() {
@@ -68,6 +70,9 @@ public class Tank {
         }
 
         move(); //每次画的时候就更新下坐标
+        //更新图形的坐标
+        rectangle.x = x;
+        rectangle.y = y;
     }
 
     //开火
@@ -109,7 +114,7 @@ public class Tank {
     }
 
     //回退方法
-    private void back() {
+    public void back() {
         this.x = oldX;
         this.y  =oldY;
         randomDir();
@@ -119,5 +124,8 @@ public class Tank {
         this.setLive(false);
         //发送爆炸
         TankFrame.INSTANCE.add(new Explode(x,y));
+    }
+    public Rectangle getRectangle(){
+        return this.rectangle;
     }
 }

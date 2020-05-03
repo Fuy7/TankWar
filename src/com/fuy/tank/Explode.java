@@ -2,11 +2,11 @@ package com.fuy.tank;
 
 import java.awt.*;
 //爆炸对象
-public class Explode {
+public class Explode extends AbstractGameObject{
 
     private int x, y,width,height;
     private int step;
-    private Boolean isLive = true;;
+    private Boolean isLive = true;
 
     public Explode(int x, int y) {
         this.x = x;
@@ -15,11 +15,11 @@ public class Explode {
         this.height = ResourceMgr.explodes[0].getHeight();
 
         //添加声音
-        new Thread(new Runnable() {
+/*        new Thread(new Runnable() {
             public void run() {
                 new Audio("audio/explode.wav").play();
             }
-        }).start();
+        }).start();*/
     }
 
     //绘画方法
@@ -32,6 +32,11 @@ public class Explode {
             die();
             step = 0;
         }
+    }
+
+    @Override
+    public boolean isLive() {
+        return isLive;
     }
 
     private void die() {

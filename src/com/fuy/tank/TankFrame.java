@@ -1,5 +1,7 @@
 package com.fuy.tank;
 
+import com.fuy.tank.chainforesponsibility.Collider;
+
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -14,12 +16,14 @@ public class TankFrame extends Frame{
     public static final int GAME_WIDTH = 800;
     public static final int GAME_HEIGHT = 600;
     Image offScreenImage = null;
-    private Player myTank;
-    private List<Tank> enemyTanks;
-    private List<Bullet> bullets;
-    private List<Explode> explodes;
 
-    private TankFrame() {
+    private Player myTank;
+    private Wall wall;
+    private List<AbstractGameObject> gameObjects;
+    private List<Collider> colliders;
+
+
+    public TankFrame() {
         this.setTitle("TankWar");
         this.setLocation(500,600); //位置
         this.setSize(GAME_WIDTH,GAME_HEIGHT); //设置大小
@@ -30,14 +34,34 @@ public class TankFrame extends Frame{
     //初始化游戏事务
     private void initGameObject() {
         myTank = new Player(100,100,Dir.L,Group.GOOD);
-        enemyTanks = new ArrayList<>();
-        bullets = new ArrayList<>();
-        explodes = new ArrayList<>();
+        wall = new Wall(300,400,200,50);
+        gameObjects = new ArrayList<>();
+        gameObjects.add(myTank);
+        gameObjects.add(wall);
         //读取配置文件
         int tankCount = Integer.parseInt(PropertiesMgr.get("initTankCount"));
         for (int i = 0; i < tankCount; i++) {
-            enemyTanks.add(new Tank(100+i*50,200,Dir.D,Group.BAD));
+            gameObjects.add(new Tank(100+i*50,200,Dir.D,Group.BAD));
         }
+        //初始化碰撞检测
+        initCollide();
+    }
+
+    private void initCollide() {
+        colliders = new ArrayList<>();
+        String[] colliderNames = PropertiesMgr.get("ColliderType").split(",");
+        for (String colliderName : colliderNames) {
+            try {
+                //将类加载到内存
+                Class clazz = Class.forName("com.fuy.tank.chainforesponsibility." + colliderName);
+                //得到构造函数进行创建
+                Collider c = (Collider) clazz.getDeclaredConstructor().newInstance();
+                colliders.add(c);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 
     //绘画方法
@@ -45,10 +69,28 @@ public class TankFrame extends Frame{
     public void paint(Graphics g) {     //画笔(系统自动初始化)
         Color c = g.getColor();
         g.setColor(Color.white);
-        g.drawString("bullet: "+bullets.size(),10,50);
-        g.drawString("enemyTank: "+enemyTanks.size(),10,70);
+        g.drawString("gameObjects: "+gameObjects.size(),10,50);
+        //g.drawString("enemyTank: "+enemyTanks.size(),10,70);
         g.setColor(c);
-        //面对对象思想： 坦克自己处理自己
+
+        //使用游戏物体的绘画
+        for (int i = 0; i < gameObjects.size(); i++) {
+            if(!gameObjects.get(i).isLive()){
+                gameObjects.remove(i);     //对象消亡并从容器中清除
+                break; //结束本次循环
+            }
+
+            for (int j = 0; j < gameObjects.size(); j++) {
+                for (Collider collider : colliders) {
+                    collider.collide(gameObjects.get(i),gameObjects.get(j));
+                }
+            }
+            if(gameObjects.get(i).isLive()){    //只有物体存在才绘画
+                gameObjects.get(i).paint(g);
+            }
+        }
+
+/*        //面对对象思想： 坦克自己处理自己
         myTank.paint(g);    //将画笔传递给坦克,自己画自己
 
         //画敌人坦克
@@ -60,7 +102,6 @@ public class TankFrame extends Frame{
                 enemyTanks.get(i).paint(g);
             }
         }
-
         //子弹与坦克碰撞检测
         for (int i = 0; i < bullets.size(); i++) {
             for (int j = 0; j < enemyTanks.size(); j++) {
@@ -75,38 +116,25 @@ public class TankFrame extends Frame{
                 bullets.get(i).paint(g);
             }
         }
-
         //画爆炸
         for (int i = 0; i < explodes.size(); i++) {
             explodes.get(i).paint(g);
-        }
+        }*/
     }
 
-    //向frame中添加子弹
-    public void add(Bullet bullet){
+    //向frame中添加游戏物体
+    public void add(AbstractGameObject gameObject){
+        this.gameObjects.add(gameObject);
+    }
+
+    /*public void add(Bullet bullet){
         this.bullets.add(bullet);
     }
 
     //向frame中添加爆炸对象
     public void add(Explode explode) {
         this.explodes.add(explode);
-    }
-
-    //使用内部类
-    private class TankKeyListener extends KeyAdapter {      //KeyAdapter里面已经实现了KeyListener接口的方法
-
-        @Override
-        public void keyPressed(KeyEvent e) {    //按下
-            //KeyEvent e 按键事件
-            //面对对象思想： 坦克自己处理自己
-            myTank.keyPressed(e);  //将键盘事件传递给他,自己移动
-        }
-
-        @Override
-        public void keyReleased(KeyEvent e) {    //按键抬起
-            myTank.keyReleased(e);
-        }
-    }
+    }*/
 
     /**
      * 解决闪烁 双缓冲问题
@@ -124,6 +152,22 @@ public class TankFrame extends Frame{
         paint(gOffScreen);
         g.drawImage(offScreenImage, 0, 0, null);
 
+    }
+
+    //使用内部类
+    private class TankKeyListener extends KeyAdapter {      //KeyAdapter里面已经实现了KeyListener接口的方法
+
+        @Override
+        public void keyPressed(KeyEvent e) {    //按下
+            //KeyEvent e 按键事件
+            //面对对象思想： 坦克自己处理自己
+            myTank.keyPressed(e);  //将键盘事件传递给他,自己移动
+        }
+
+        @Override
+        public void keyReleased(KeyEvent e) {    //按键抬起
+            myTank.keyReleased(e);
+        }
     }
 
 }
