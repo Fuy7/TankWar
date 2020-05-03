@@ -3,11 +3,12 @@ package com.fuy.tank;
 import com.fuy.tank.chainforesponsibility.Collider;
 
 import java.awt.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 //封装对象体
-public class GameModel {
+public class GameModel implements Serializable {
 
     private Player myTank;
     private Wall wall;
@@ -26,12 +27,14 @@ public class GameModel {
         //g.drawString("enemyTank: "+enemyTanks.size(),10,70);
         g.setColor(c);
 
-        //使用游戏物体的绘画
         for (int i = 0; i < gameObjects.size(); i++) {
-            if(!gameObjects.get(i).isLive()){
+            if (!gameObjects.get(i).isLive()) {
                 gameObjects.remove(i);     //对象消亡并从容器中清除
                 break; //结束本次循环
             }
+        }
+        //使用游戏物体的绘画
+        for (int i = 0; i < gameObjects.size(); i++) {
 
             for (int j = 0; j < gameObjects.size(); j++) {
                 for (Collider collider : colliders) {

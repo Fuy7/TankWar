@@ -3,6 +3,7 @@ package com.fuy.tank;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.*;
 
 
 //窗口类
@@ -54,9 +55,15 @@ public class TankFrame extends Frame{
         @Override
         public void keyPressed(KeyEvent e) {    //按下
             //KeyEvent e 按键事件
-            //面对对象思想： 坦克自己处理自己
-            gm.getMyTank().keyPressed(e);  //将键盘事件传递给他,自己移动
+            int keyCode = e.getKeyCode();
+            if(keyCode == KeyEvent.VK_S) save();
+            else if(keyCode == KeyEvent.VK_L) load();
+            else {
+                //面对对象思想： 坦克自己处理自己
+                gm.getMyTank().keyPressed(e);  //将键盘事件传递给他,自己移动
+            }
         }
+
 
         @Override
         public void keyReleased(KeyEvent e) {    //按键抬起
@@ -68,4 +75,46 @@ public class TankFrame extends Frame{
     public GameModel getGameModel(){
         return this.gm;
     }
+    //存盘
+    private void save() {
+        FileOutputStream fos = null;
+        ObjectOutputStream oos = null;
+        try {
+            File file = new File("D:/IDEA_wkspace/TankWar/tank.dat");
+            fos = new FileOutputStream(file);
+            oos = new ObjectOutputStream(fos);
+            oos.writeObject(gm);
+            oos.flush();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            try {
+                if(oos!=null)
+                    oos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    //读取
+    private void load() {
+        FileInputStream fis = null;
+        ObjectInputStream ois = null;
+        try {
+            File file = new File("D:/IDEA_wkspace/TankWar/tank.dat");
+            fis = new FileInputStream(file);
+            ois = new ObjectInputStream(fis);
+            this.gm = (GameModel)(ois.readObject());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            try {
+                if(ois!=null)
+                    ois.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 }
