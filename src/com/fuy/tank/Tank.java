@@ -79,7 +79,7 @@ public class Tank extends AbstractGameObject{
     private void fire() {
         int bx = x + ResourceMgr.goodTankU.getWidth()/2 - ResourceMgr.bulletU.getWidth()/2;
         int by = y + ResourceMgr.goodTankU.getHeight()/2 - ResourceMgr.bulletU.getHeight()/2;
-        TankFrame.INSTANCE.add(new Bullet(bx,by,dir,group));
+        TankFrame.INSTANCE.getGameModel().add(new Bullet(bx,by,dir,group));
     }
 
     private Random random = new Random();
@@ -88,13 +88,13 @@ public class Tank extends AbstractGameObject{
         if(moving == false) return; //停止状态
         oldX = x;
         oldY = y;
-        boundCheck();   //碰撞检测
         switch (dir){
             case L : x-=SPEED; break;
             case R : x+=SPEED; break;
             case U : y-=SPEED; break;
             case D : y+=SPEED; break;
         }
+        boundCheck();   //碰撞检测
         //生成随机方向
         randomDir();
         if((random.nextInt(100)) > 95) fire();
@@ -108,7 +108,7 @@ public class Tank extends AbstractGameObject{
 
     //边界检测
     private void boundCheck() {
-        if(x < (0+tankWidth) || y  < (50+tankHeight) || x + tankWidth > TankFrame.GAME_WIDTH || y + tankHeight> TankFrame.GAME_HEIGHT){
+        if(this.x < 0 || this.y  < 30 || this.x > TankFrame.GAME_WIDTH-30 || this.y > TankFrame.GAME_HEIGHT-40){
             back();
         }
     }
@@ -123,7 +123,7 @@ public class Tank extends AbstractGameObject{
     public void die() {
         this.setLive(false);
         //发送爆炸
-        TankFrame.INSTANCE.add(new Explode(x,y));
+        TankFrame.INSTANCE.getGameModel().add(new Explode(x,y));
     }
     public Rectangle getRectangle(){
         return this.rectangle;

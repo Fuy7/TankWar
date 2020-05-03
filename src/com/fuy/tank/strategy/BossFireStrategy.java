@@ -14,7 +14,7 @@ public class BossFireStrategy implements FireStrategy{
         int by = player.getY() + ResourceMgr.goodTankU.getHeight()/2 - ResourceMgr.bulletU.getHeight()/2;
         Dir[] dirs = Dir.values();
         for (Dir dir : dirs) {
-            TankFrame.INSTANCE.add(new com.fuy.tank.Bullet(bx,by,dir,player.getGroup()));
+            TankFrame.INSTANCE.getGameModel().add(new com.fuy.tank.Bullet(bx,by,dir,player.getGroup()));
         }
     }
 }
